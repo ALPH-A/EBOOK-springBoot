@@ -1,0 +1,48 @@
+package tn.spring.bookStore.entity;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+//It's a convenience annotation that combines @Controller and @ResponseBody – which eliminates the need to annotate every request handling method
+//This annotation is applied to a class to mark it as a request handler.
+//RestController takes care of mapping request data to the defined request handler method. Once response body is generated from the handler method, it converts it to JSON or XML response.
+@RestController
+@CrossOrigin("*")
+public class CommandController {
+	@Autowired
+    private CommandService service;
+
+    
+    @PostMapping(value="addCommand")
+    public Command addCommand(@RequestBody Command command) {
+         service.saveCommand(command);
+         return command;
+    }
+    @PostMapping(value="addCommands")
+    public List<Command> addCommands(@RequestBody List<Command> commands) {
+        return service.saveCommands(commands);
+    }
+    @GetMapping(value="Commands")
+    public List<Command> findAllProducts() {
+        return service.getCommands();
+    }
+    @GetMapping(value="commandById/{id}")
+    public Command findProductById(@PathVariable int id) {
+        return service.getCommandById(id);
+    }
+    @DeleteMapping(value="commadDelete/{id}")
+    public String deleteProduct(@PathVariable int id) {
+        return service.deleteCommand(id);
+    }
+
+}
