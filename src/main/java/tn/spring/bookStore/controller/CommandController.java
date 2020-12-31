@@ -37,11 +37,11 @@ public class CommandController {
         return service.getCommands();
     }
     @GetMapping(value="commandById/{id}")
-    public Command findProductById(@PathVariable int id) {
+    public Command findCommandById(@PathVariable int id) {
         return service.getCommandById(id);
     }
     @DeleteMapping(value="commadDelete/{id}")
-    public String deleteProduct(@PathVariable int id) {
+    public String deleteCommand(@PathVariable int id) {
         return service.deleteCommand(id);
     }
 
