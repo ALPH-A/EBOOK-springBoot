@@ -61,6 +61,11 @@ public class Livre {
 			this.prix = prix;
 			this.genre = genre;
 		}
+		public Livre(Long id) {
+			
+			this.id = id;
+			
+		}
 		public Livre() {
 			
 		}

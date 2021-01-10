@@ -1,11 +1,16 @@
 package tn.spring.bookStore.service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.spring.bookStore.entity.Command;
+
+import tn.spring.bookStore.entity.Livre;
+
 import tn.spring.bookStore.repository.CommandRepository;
 //Service annotation : to indicate that it's holding the business logic.
 @Service
@@ -13,8 +18,12 @@ public class CommandService {
 	// Autowired annotation : we can used it for now like a constructor to get all methods form CommandRepository
 	@Autowired
     private CommandRepository repository;
+	
 
     public Command saveCommand(Command command) {
+    	
+    	
+    	
         return repository.save(command);
     }
     public List<Command> saveCommands(List<Command> command) {

@@ -26,8 +26,7 @@ public class EvenementController {
 	}
 	@GetMapping("/{id}")
 	public Evenement getEvenementById(@PathVariable Long id) {
-		 return evenementService.getEvenementById(id);
-				 
+		 return evenementService.getEvenementById(id);		 
 	}
 
 	@PostMapping
