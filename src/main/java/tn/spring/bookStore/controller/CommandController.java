@@ -30,9 +30,6 @@ import tn.spring.bookStore.service.CommandService;
 public class CommandController {
 	@Autowired
     private CommandService service;
-	
-
-    
     @PostMapping(value="addCommand")
     public Command addCommand(@RequestBody Command command) {
     	service.saveCommand(command);
@@ -44,7 +41,7 @@ public class CommandController {
         return service.saveCommands(commands);
     }
     @GetMapping(value="Commands")
-    public List<Command> findAllProducts() {
+    public List<Command> findAllCommands() {
         return service.getCommands();
     }
     @GetMapping(value="commandById/{id}")
