@@ -89,26 +89,31 @@ public class StatisticsController {
 		long avgMoneyPerMounth = (long) (totalMoney/nbMounth);
 		javax.persistence.Query q1 = em.createNativeQuery("SELECT DATE_FORMAT(created_at, '%Y%m'),total_prize FROM command");
 		List<Object[]> list1 = q1.getResultList();
-		String n = new String();
-		Double b = 0.0;
+		
+		
 		List<Double> list2 =  new ArrayList<Double>();
+		Object[] firstOne = list1.get(0);
+		String n = firstOne[0].toString();
+		Double b = 0.0;
 		for (Object[] objects : list1) {
-			if (!n.equals(objects[0].toString())) {
-				n = objects[0].toString();
-				if (objects[1]!= null) {
-					b=b+(Double) objects[1];
-				}
-				list2.add(b);
-				b=0.0;
-			}
 			if (n.equals(objects[0].toString())) {
 				if (objects[1]!= null) {
 					b=b+(Double) objects[1];
 				}
-				
+			}
+			else {
+				list2.add(b);
+				n = objects[0].toString();
+				if (n.equals(objects[0].toString())) {
+					b=0.0;
+					if (objects[1]!= null) {
+						b=b+(Double) objects[1];
+					}
+				}
 			}
 			 
 		}
+		list2.add(b);
 		Double d = 0.0;
 		Double growth = 1.0;
 		for (Double double1 : list2) {
@@ -124,7 +129,7 @@ public class StatisticsController {
 		
 		
 		
-		return avgMoneyPerMounth*growth;
+		return growth*avgMoneyPerMounth;
 	}
 	
 	
