@@ -28,6 +28,7 @@ public class Command {
     private Set<Livre> livres ;
 	@OneToOne
 	private User user;
+	private Double totalPrize;
 	
 	public Command() {
 		super();
@@ -50,6 +51,15 @@ public class Command {
 		this.createdAt = createdAt;
 		this.livres = livres;
 		this.user = user;
+	}
+	
+
+	public Command(LocalDateTime createdAt, Set<Livre> livres, User user, Double totalPrize) {
+		super();
+		this.createdAt = createdAt;
+		this.livres = livres;
+		this.user = user;
+		this.totalPrize = totalPrize;
 	}
 
 	public Long getId() {
@@ -83,6 +93,15 @@ public class Command {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+
+	public Double getTotalPrize() {
+		return totalPrize;
+	}
+
+	public void setTotalPrize(Double totalPrize) {
+		this.totalPrize = totalPrize;
 	}
 
 	@Override
