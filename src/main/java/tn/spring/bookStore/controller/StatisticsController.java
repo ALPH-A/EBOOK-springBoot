@@ -9,7 +9,10 @@ import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -130,6 +133,48 @@ public class StatisticsController {
 		
 		
 		return growth*avgMoneyPerMounth;
+	}
+	@GetMapping(value="tendance")
+	public List<Object[]> tendance() {
+		javax.persistence.Query q = em.createNativeQuery("SELECT id from livre order by id DESC limit 10");
+		List<BigInteger> list = q.getResultList();
+		javax.persistence.Query q1 = em.createNativeQuery("SELECT livres_id from command_livres order by livres_id DESC limit 100");
+		List<BigInteger> list1 = q1.getResultList();
+		List<Object[]> list2 = new ArrayList<Object[]>();
+		
+		long count = 0 ;
+		for (int i = 0; i < list.size(); i++) {
+			for (int j = 0; j < list1.size(); j++) {
+				if (list.get(i).equals(list1.get(j))) {
+					count = count +1 ;
+				}
+			}
+			Object[] com = {list.get(i),count};
+			
+			list2.add(com);
+			
+			
+			
+			System.out.println(com[0]+"   "+com[1]);
+			count=0;
+		}
+		for (int j = 0; j < list2.size(); j++) {
+			for (int i = j+1; i < list2.size(); i++) {
+				Object[] a = list2.get(j);
+				Object[] b = list2.get(i);
+				long a1 = (long) a[1];
+				long b1 = (long) b[1];
+				if (a1<b1) {
+					Collections.swap(list2, i, j);
+			}
+			
+			}
+			
+		}
+		
+		
+		
+		return list2;
 	}
 	
 	
