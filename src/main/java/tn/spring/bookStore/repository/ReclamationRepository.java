@@ -8,4 +8,6 @@ import tn.spring.bookStore.entity.Reclamation;
 @Repository
 public interface ReclamationRepository extends JpaRepository<Reclamation, Long>{
 
+	//Reclamation findByName(String name);
+
 }

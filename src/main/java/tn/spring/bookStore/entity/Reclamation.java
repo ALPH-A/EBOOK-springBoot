@@ -1,5 +1,6 @@
 package tn.spring.bookStore.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -11,7 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Reclamation {
+public class Reclamation implements Serializable {
+	private static final long serialVersionUID = 1L;
+	 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
@@ -23,6 +26,7 @@ public class Reclamation {
 	private String status;
 	private long user_id;
 	private String refReclamation;
+	
 	public Long getId() {
 		return id;
 	}
@@ -71,9 +75,22 @@ public class Reclamation {
 	public void setRefReclamation(String refReclamation) {
 		this.refReclamation = refReclamation;
 	}
+	public Reclamation() {};
 	public Reclamation(LocalDateTime createdAt, LocalDateTime finishedAt, String sujet, String description,
 			String status, long user_id, String refReclamation) {
 		super();
+		this.createdAt = createdAt;
+		this.finishedAt = finishedAt;
+		this.sujet = sujet;
+		this.description = description;
+		this.status = status;
+		this.user_id = user_id;
+		this.refReclamation = refReclamation;
+	}
+	public Reclamation( long id,LocalDateTime createdAt, LocalDateTime finishedAt, String sujet, String description,
+			String status, long user_id, String refReclamation) {
+		super();
+		this.id=id;
 		this.createdAt = createdAt;
 		this.finishedAt = finishedAt;
 		this.sujet = sujet;

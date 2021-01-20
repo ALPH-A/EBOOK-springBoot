@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,8 +30,8 @@ public class ReclamationController {
 		return service.saveReclamation(reclamation);
 	}
 	@GetMapping("/getReclamations")
-	public List<Reclamation> getReclamation(){
-		return (List<Reclamation>)service.getReclamations();
+	public Iterable<Reclamation> getReclamation(){
+		return service.getReclamations();
 		
 	}
 	/*
@@ -40,16 +41,29 @@ public class ReclamationController {
     }
     */
     @GetMapping("/AllReclamations")
-    public List<Reclamation> findAllProducts() {
+    public Iterable<Reclamation> findAllReclamations() {
         return service.getReclamations();
     }
     @GetMapping("/ReclamationById/{id}")
-    public Reclamation findCommandById(@PathVariable int id) {
+    public Reclamation findReclamationById(@PathVariable int id) {
         return service.getReclamationById(id);
     }
-    @DeleteMapping("/ReclamationDelete/{id}")
-    public String deleteCommand(@PathVariable int id) {
+    /*
+    @GetMapping("/ReclamationByName/{name}")
+    public Reclamation findReclamationByName(@PathVariable String name) {
+        return service.getReclamationByName(name);
+    }
+    */
+    @DeleteMapping("/deleteReclamation/{id}")
+    public String deleteReclamation(@PathVariable int id) {
         return service.deleteReclamation(id);
+    }
+    
+    @PutMapping("/updateReclamation")
+    public Reclamation updateReclamation (@RequestBody Reclamation r){
+    	return service.updateReclamation(r);
+    	
+    	
     }
 	
 	
