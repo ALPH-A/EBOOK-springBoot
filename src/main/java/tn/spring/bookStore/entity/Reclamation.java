@@ -10,8 +10,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.ManyToAny;
 
 @Entity
+@Table
 public class Reclamation implements Serializable {
 	private static final long serialVersionUID = 1L;
 	 
@@ -24,9 +31,10 @@ public class Reclamation implements Serializable {
 	private String sujet;
 	private String description;
 	private String status;
-	private long user_id;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 	private String refReclamation;
-	
 	public Long getId() {
 		return id;
 	}
@@ -63,11 +71,11 @@ public class Reclamation implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public long getUser_id() {
-		return user_id;
+	public User getUser() {
+		return user;
 	}
-	public void setUser_id(long user_id) {
-		this.user_id = user_id;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public String getRefReclamation() {
 		return refReclamation;
@@ -75,37 +83,30 @@ public class Reclamation implements Serializable {
 	public void setRefReclamation(String refReclamation) {
 		this.refReclamation = refReclamation;
 	}
-	public Reclamation() {};
-	public Reclamation(LocalDateTime createdAt, LocalDateTime finishedAt, String sujet, String description,
-			String status, long user_id, String refReclamation) {
-		super();
-		this.createdAt = createdAt;
-		this.finishedAt = finishedAt;
-		this.sujet = sujet;
-		this.description = description;
-		this.status = status;
-		this.user_id = user_id;
-		this.refReclamation = refReclamation;
+	
+	
+	
+	public Reclamation() {
+		
 	}
-	public Reclamation( long id,LocalDateTime createdAt, LocalDateTime finishedAt, String sujet, String description,
-			String status, long user_id, String refReclamation) {
+	public Reclamation(Long id, LocalDateTime createdAt, LocalDateTime finishedAt, String sujet, String description,
+			String status, User user, String refReclamation) {
 		super();
-		this.id=id;
+		this.id = id;
 		this.createdAt = createdAt;
 		this.finishedAt = finishedAt;
 		this.sujet = sujet;
 		this.description = description;
 		this.status = status;
-		this.user_id = user_id;
+		this.user = user;
 		this.refReclamation = refReclamation;
 	}
 	@Override
 	public String toString() {
 		return "Reclamation [id=" + id + ", createdAt=" + createdAt + ", finishedAt=" + finishedAt + ", sujet=" + sujet
-				+ ", description=" + description + ", status=" + status + ", user_id=" + user_id + ", refReclamation="
+				+ ", description=" + description + ", status=" + status + ", user=" + user + ", refReclamation="
 				+ refReclamation + "]";
 	}
 	
 	
-
 }

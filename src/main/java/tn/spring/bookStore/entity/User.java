@@ -1,10 +1,14 @@
 package tn.spring.bookStore.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -19,8 +23,22 @@ public class User {
 	private Long num_tele;
 	private String adresse;
 	private String role;
+	@OneToMany
+	private List<Reclamation> listR=new ArrayList<>();
 	
 	
+	public Long getNum_tele() {
+		return num_tele;
+	}
+	public void setNum_tele(Long num_tele) {
+		this.num_tele = num_tele;
+	}
+	public List<Reclamation> getListR() {
+		return listR;
+	}
+	public void setListR(List<Reclamation> listR) {
+		this.listR = listR;
+	}
 	public Long getId() {
 		return id;
 	}

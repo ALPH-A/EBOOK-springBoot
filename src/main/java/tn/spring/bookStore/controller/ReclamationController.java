@@ -3,6 +3,7 @@ package tn.spring.bookStore.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,23 +14,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javassist.compiler.ast.ASTList;
+import tn.spring.bookStore.beans.ReclamationBean;
 import tn.spring.bookStore.entity.Command;
 import tn.spring.bookStore.entity.Reclamation;
+import tn.spring.bookStore.entity.User;
 import tn.spring.bookStore.service.ReclamationService;
 
 
 @RestController
-
+@RequestMapping(value = "/reclamations")
 public class ReclamationController {
 	
 	@Autowired
 	private ReclamationService service ;
-	@PostMapping("/createReclamation")
-	public Reclamation createReclamtion(@RequestBody Reclamation reclamation) {
+	@PostMapping
+	public Reclamation createReclamtion(@Validated @RequestBody ReclamationBean reclamation) {
 	//reclamation.setRefReclamation(refReclamation);
 		return service.saveReclamation(reclamation);
 	}
-	@GetMapping("/getReclamations")
+	@GetMapping
 	public Iterable<Reclamation> getReclamation(){
 		return service.getReclamations();
 		
@@ -40,13 +43,14 @@ public class ReclamationController {
         return service.saveReclamation(reclamations);
     }
     */
-    @GetMapping("/AllReclamations")
-    public Iterable<Reclamation> findAllReclamations() {
-        return service.getReclamations();
-    }
-    @GetMapping("/ReclamationById/{id}")
+   
+    @GetMapping("/{id}")
     public Reclamation findReclamationById(@PathVariable int id) {
         return service.getReclamationById(id);
+    }
+    @GetMapping("/{id}/user")
+    public User findUserByReclamationId(@PathVariable int id) {
+        return service.getReclamationById(id).getUser();
     }
     /*
     @GetMapping("/ReclamationByName/{name}")
@@ -54,14 +58,14 @@ public class ReclamationController {
         return service.getReclamationByName(name);
     }
     */
-    @DeleteMapping("/deleteReclamation/{id}")
+    @DeleteMapping("/{id}")
     public String deleteReclamation(@PathVariable int id) {
         return service.deleteReclamation(id);
     }
     
-    @PutMapping("/updateReclamation")
-    public Reclamation updateReclamation (@RequestBody Reclamation r){
-    	return service.updateReclamation(r);
+    @PutMapping("/{id}")
+    public Reclamation updateReclamation (@RequestBody Reclamation r,@PathVariable long id){
+    	return service.updateReclamation(r,id);
     	
     	
     }
