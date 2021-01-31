@@ -24,7 +24,9 @@ public class User {
 	private String adresse;
 	private String role;
 	@OneToMany
-	private List<Reclamation> listR=new ArrayList<>();
+	private List<Reclamation> reclamtions=new ArrayList<>();
+	@OneToMany
+	private List<Avis> avis=new ArrayList<>();
 	
 	
 	public Long getNum_tele() {
@@ -33,11 +35,18 @@ public class User {
 	public void setNum_tele(Long num_tele) {
 		this.num_tele = num_tele;
 	}
-	public List<Reclamation> getListR() {
-		return listR;
+	
+	public List<Reclamation> getReclamtions() {
+		return reclamtions;
 	}
-	public void setListR(List<Reclamation> listR) {
-		this.listR = listR;
+	public void setReclamtions(List<Reclamation> reclamtions) {
+		this.reclamtions = reclamtions;
+	}
+	public List<Avis> getAvis() {
+		return avis;
+	}
+	public void setAvis(List<Avis> avis) {
+		this.avis = avis;
 	}
 	public Long getId() {
 		return id;
