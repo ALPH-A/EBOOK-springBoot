@@ -12,9 +12,10 @@ import javax.validation.constraints.Size;
  */
 public class ReclamationBean {
 	@NotNull(message = "le sujet de la reclamation est obligatoir")
+	@Size(min = 5)
 	private String sujet;
 	@NotNull(message = "la description de la reclamation est obligatoir")
-	@Size(min = 4)
+	@Size(min = 10)
 	private String description;
 	public String getSujet() {
 		return sujet;
