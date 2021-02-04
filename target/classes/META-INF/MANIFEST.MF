@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
-Built-By: Spingler-PC
-Build-Jdk: 11.0.8
 Implementation-Title: bookStoreProject
 Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: ahmed
 Implementation-Vendor-Id: tn.spring.bookStore
-Implementation-URL: https://spring.io/projects/spring-boot/bookStoreProj
- ect
+Build-Jdk: 1.8.0_211
+Implementation-URL: https://spring.io/projects/spring-boot/bookStorePr
+ oject
 Created-By: Maven Integration for Eclipse
 
